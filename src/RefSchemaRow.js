@@ -32,6 +32,7 @@ class RefSchemaRow extends React.Component {
         schema={schema}
         isTopRowDereference={isTopRow}
         isArrayItem={isArrayItem}
+        handleRefToggle={this.handleRefToggle}
       />
     );
   }

@@ -8,7 +8,12 @@ import "./styles.css";
 */
 class NormalSchemaRow extends React.Component {
   render() {
-    const { schema, isTopRowDereference, isArrayItem } = this.props;
+    const {
+      schema,
+      isTopRowDereference,
+      isArrayItem,
+      handleRefToggle
+    } = this.props;
     const hasName = schema.name ? schema.name : "";
     var dataSign, type;
 
@@ -33,7 +38,7 @@ class NormalSchemaRow extends React.Component {
           {hasName && <span>{schema.name} : </span>}
           {dataSign}
           {isTopRowDereference && (
-            <button className="ref-click">
+            <button className="ref-click" onClick={handleRefToggle}>
               <span>{isTopRowDereference}</span>
               <RemoveCircleRoundedIcon fontSize="small" />
             </button>
