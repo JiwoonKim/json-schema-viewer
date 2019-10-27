@@ -165,7 +165,7 @@ class RefSchemaRow extends React.Component {
     } else {
       const parsedURI = schema.uri.split("#");
       const refURI = parsedURI[0] === "" ? schema.schemaSource : parsedURI[0];
-      const refSchema = require(refURI).definitions[schema.refType];
+      const refSchema = require(refURI).definitions[dataSign];
       refSchema.name = schema.name;
 
       return <div>{this.renderSchema(refSchema, true)}</div>;
