@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "properties": {
+    "client": {
+      "name": "client",
+      "title": "Get Client",
+      "type": "object",
+      "description": "Get all details about a client",
+      "properties": {
+        "clientId": {
+          "name": "clientId",
+          "type": "number",
+          "description": ""
+        }
+      }
+    },
+    "email": {
+      "name": "email",
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,40 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+h3 {
+  background-color: lightgray;
+  color: rgb(56, 56, 233);
+}
+
+h4 {
+  color: rgb(80, 80, 165);
+}
+
+.arrayItem {
+  font-size: 25px;
+}
+
+.json-data-structure {
+  min-width: 100px;
+  background-color: lightyellow;
+}
+
+.info-meta {
+  min-width: 70px;
+}
+
+.info-description {
+  max-width: 100px;
+}
+
+.ref-click {
+  background-color: transparent;
+  color: rgb(80, 80, 165);
+  border: none;
+}
+
+table {
+  white-space: nowrap;
+}

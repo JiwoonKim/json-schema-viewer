@@ -1,0 +1,25 @@
+{
+  "type": "array",
+  "description": "List of roles",
+  "items": {
+    "type": "object",
+    "title": "Get Role Response",
+    "description": "Get all details about a role",
+    "properties": {
+      "created": {
+        "name": "created",
+        "type": "string",
+        "description": "Description of what this role is used for."
+      },
+      "scopes": {
+        "name": "scopes",
+        "type": "array",
+        "description": "List of scopes",
+        "items": {
+          "type": "string",
+          "description": "A single scope"
+        }
+      }
+    }
+  }
+}

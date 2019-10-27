@@ -1,0 +1,9 @@
+{
+  "name": "scopes",
+  "type": "array",
+  "description": "List of scopes",
+  "items": {
+    "type": "string",
+    "description": "A single scope"
+  }
+}

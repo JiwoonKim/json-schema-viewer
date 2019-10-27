@@ -1,0 +1,15 @@
+{
+  "name": "expandedScopes",
+  "type": "array",
+  "description": "List of expanded scopes",
+  "items": [
+    {
+      "type": "string",
+      "description": "A single scope"
+    },
+    {
+      "type": "number",
+      "description": "The number for a single scope"
+    }
+  ]
+}

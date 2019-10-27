@@ -1,0 +1,19 @@
+{
+  "definitions": {
+    "name": {
+      "type": "string"
+    },
+    "address": {
+      "type": "object",
+      "properties": {
+        "city": { "type": "string" },
+        "state": { "type": "string" }
+      }
+    }
+  },
+  "type": "object",
+  "properties": {
+    "billing_address": { "$ref": "#/definitions/address" },
+    "shipping_address": { "$ref": "#/definitions/address" }
+  }
+}

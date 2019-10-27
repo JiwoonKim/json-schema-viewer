@@ -1,0 +1,6 @@
+{
+  "name": "expires",
+  "type": "string",
+  "format": "date-time",
+  "description": "Date and time where the clients access is set to expire"
+}
