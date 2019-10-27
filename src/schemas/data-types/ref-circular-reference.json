@@ -12,6 +12,7 @@
       }
     }
   },
+
   "type": "object",
   "properties": {
     "person": { "$ref": "#/definitions/person" }

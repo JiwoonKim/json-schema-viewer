@@ -55,15 +55,17 @@ class SchemaViewer extends React.Component {
     let rows = [];
     rows.push(this.createNormalRow(schema, isArrayItem));
 
-    Object.entries(schema.properties).forEach(([key, subSchema]) => {
-      /* make sure subSchemas have name property
+    if (schema.properties) {
+      Object.entries(schema.properties).forEach(([key, subSchema]) => {
+        /* make sure subSchemas have name property
          in case $ref is used within
       */
-      if (!("name" in subSchema)) {
-        subSchema["name"] = key;
-      }
-      rows.push(this.renderSchema(subSchema));
-    });
+        if (!("name" in subSchema)) {
+          subSchema["name"] = key;
+        }
+        rows.push(this.renderSchema(subSchema));
+      });
+    }
 
     const closeObjectRow = (
       <TableRow>

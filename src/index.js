@@ -19,6 +19,7 @@ function App() {
   return (
     <div>
       <h3>Example Schema</h3>
+      {View(example)}
       <h3>Specifications (for schema types)</h3>
       <h4>(1) Default Schema</h4>
       {View(defaultDataType)}
@@ -35,6 +36,7 @@ function App() {
       <h5>(4-1) expand or shrink &#36;ref</h5>
       {View(refSchema)}
       <h5>(4-2) circular reference (dereference $ref one level at a time)</h5>
+      {View(refCircularReference)}
     </div>
   );
 }

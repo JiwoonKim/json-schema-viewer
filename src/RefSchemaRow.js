@@ -17,7 +17,7 @@ class RefSchemaRow extends React.Component {
   }
 
   handleRefToggle = () => {
-    console.log("before" + this.state.isExpanded);
+    console.log(this);
     this.setState({
       isExpanded: !this.state.isExpanded
     });
@@ -80,15 +80,17 @@ class RefSchemaRow extends React.Component {
     let rows = [];
     rows.push(this.createNormalRow(schema, isTopRow, isArrayItem));
 
-    Object.entries(schema.properties).forEach(([key, subSchema]) => {
-      /* make sure subSchemas have name property
-       in case $ref is used within
+    if (schema.properties) {
+      Object.entries(schema.properties).forEach(([key, subSchema]) => {
+        /* make sure subSchemas have name property
+         in case $ref is used within
       */
-      if (!("name" in subSchema)) {
-        subSchema["name"] = key;
-      }
-      rows.push(this.renderSchema(subSchema));
-    });
+        if (!("name" in subSchema)) {
+          subSchema["name"] = key;
+        }
+        rows.push(this.renderSchema(subSchema));
+      });
+    }
 
     const closeObjectRow = (
       <TableRow>
