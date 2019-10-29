@@ -1,3 +1,4 @@
+/* styles for App component */
 .App {
   font-family: sans-serif;
   text-align: center;
@@ -9,33 +10,6 @@ h3 {
 
 h4 {
   color: rgb(80, 80, 165);
-}
-
-.arrayItem {
-  font-size: 25px;
-}
-
-.json-data-structure {
-  min-width: 100px;
-  background-color: lightyellow;
-}
-
-.info-meta {
-  min-width: 70px;
-}
-
-.info-description {
-  max-width: 100px;
-}
-
-.ref-click {
-  background-color: transparent;
-  color: rgb(80, 80, 165);
-  border: none;
-}
-
-table {
-  white-space: nowrap;
 }
 
 .tab {
@@ -56,4 +30,32 @@ table {
 
 .warning {
   color: rgb(233, 59, 59);
+}
+
+/* style for each column in a row
+   (json-data-structure | info-meta | info-description)
+*/
+.json-data-structure {
+  width: 250px;
+  background-color: lightyellow;
+}
+
+.info-meta {
+  width: 100px;
+}
+
+.info-description {
+  width: 200px;
+}
+
+/*  */
+.ref-click {
+  background-color: transparent;
+  color: rgb(80, 80, 165);
+  border: none;
+}
+
+/* */
+table {
+  white-space: nowrap;
 }

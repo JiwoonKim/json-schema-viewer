@@ -70,8 +70,8 @@ class SchemaViewer extends React.Component {
     const closeObjectRow = (
       <TableRow>
         <TableCell className="json-data-structure">}</TableCell>
-        <TableCell />
-        <TableCell />
+        <TableCell className="info-meta" />
+        <TableCell className="info-description" />
       </TableRow>
     );
     rows.push(closeObjectRow);
@@ -101,7 +101,7 @@ class SchemaViewer extends React.Component {
   */
   renderSchema(schema, isArrayItem = false) {
     return (
-      <TableBody className="tablebody">
+      <div className="tablebody">
         {"$ref" in schema
           ? this.renderRef(schema, isArrayItem)
           : schema.type === "object"
@@ -109,7 +109,7 @@ class SchemaViewer extends React.Component {
           : schema.type === "array"
           ? this.renderArray(schema, isArrayItem)
           : this.renderDefault(schema, isArrayItem)}
-      </TableBody>
+      </div>
     );
   }
 

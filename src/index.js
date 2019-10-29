@@ -28,7 +28,7 @@ class App extends React.Component {
     return (
       <div>
         <h3> Example Schema </h3>
-        <p>actual JSON example used in Taskcluster</p>
+        <p>actual JSON example used in Taskcluster (Auth - List Clients)</p>
         {this.view(example)}
       </div>
     );
@@ -76,7 +76,7 @@ class App extends React.Component {
     return (
       <div>
         <h3>Object Type</h3>
-        <p>depicts nested structure</p>
+        <p>depicts nested structure using &#123; &#125; </p>
         {this.view(objectType)}
       </div>
     );
@@ -89,8 +89,15 @@ class App extends React.Component {
     return (
       <div>
         <h3> Ref Types </h3>
-        <p>expand or shrink &#36;ref</p>
-        <p className="warning">click (+) to expand and (-) to shrink</p>
+        <p>
+          expand or shrink &#36;ref
+          <span className="warning">
+            {" "}
+            (click (+) to expand and (-) to shrink)
+          </span>
+        </p>
+        <p>$ref is dynamically retrieved when expand button is clicked!</p>
+
         {this.view(refSchema)}
         <h3>Circular References</h3>
         <p>dereference $ref one level at a time</p>
@@ -109,8 +116,8 @@ class App extends React.Component {
       <div>
         <h2>JSON Schema Viewer Demo :)</h2>
         <p className="warning">
-          table columns do not align at the moment! (yellow = json data
-          structure || white = meta data & info)
+          table columns do not align at the moment! (yellow = json column ||
+          white = info column)
         </p>
         <p className="warning">
           but the lengths of the yellow coloring indicates same level of
@@ -152,7 +159,7 @@ class App extends React.Component {
           >
             Ref Types
           </button>
-          <span>click to view specific implementations!</span>
+          <strong>&#8592; click to view specific implementations!</strong>
         </div>
       </div>
     );
