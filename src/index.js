@@ -108,18 +108,32 @@ class App extends React.Component {
     );
   };
 
-  renderButtons() {
+  renderCombType = () => {
+    const anyOfType = "./schemas/data-types/anyof.json";
+    const oneOfType = "./schemas/data-types/oneof.json";
+    const allOfType = "./schemas/data-types/allof.json";
+
+    return (
+      <div>
+        <h3> Combination Schema Types </h3>
+        <h3>(1) anyOf</h3>
+        <p>uses '// Any of' & '// or' comments</p>
+        {this.view(anyOfType)}
+        <h3>(2) oneOf</h3>
+        <p>uses '// One of' & '// or' comments</p>
+        {this.view(oneOfType)}
+        <h3>(3) allOf</h3>
+        <p>uses '// All of' & '// and' comments</p>
+        {this.view(allOfType)}
+      </div>
+    );
+  };
+
+  renderHeader() {
     return (
       <div>
         <h2>JSON Schema Viewer Demo :)</h2>
-        <p className="warning">
-          table columns do not align at the moment! (yellow = json column ||
-          white = info column)
-        </p>
-        <p className="warning">
-          but the lengths of the yellow coloring indicates same level of
-          indentation :) The shorter the row is, the more it is nested within!
-        </p>
+        <p className="warning">indentation is not provided at the moment!</p>
         <div className="buttons">
           <button
             className="tab"
@@ -156,6 +170,13 @@ class App extends React.Component {
           >
             Ref Types
           </button>
+          <button
+            className="tab"
+            value="comb type"
+            onClick={e => this.handleToggle(e)}
+          >
+            Comb Types
+          </button>
           <strong>&#8592; click to view specific implementations!</strong>
         </div>
       </div>
@@ -165,7 +186,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        {this.renderButtons()}
+        {this.renderHeader()}
         {this.state.viewer === "default type"
           ? this.renderDefaultDataType()
           : this.state.viewer === "array type"
@@ -174,6 +195,8 @@ class App extends React.Component {
           ? this.renderObjectType()
           : this.state.viewer === "ref type"
           ? this.renderRefType()
+          : this.state.viewer === "comb type"
+          ? this.renderCombType()
           : this.renderExampleSchema()}
       </div>
     );

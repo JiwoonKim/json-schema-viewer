@@ -1,0 +1,6 @@
+{
+  "allOf": [
+    { "type": "string", "description": "Nickname for user" },
+    { "maxLength": 5, "description": "Nickname's max length is 5" }
+  ]
+}

@@ -104,13 +104,73 @@ class SchemaViewer extends React.Component {
     return this.createRefSchemaRow(refSchema);
   }
 
+  /* render combination of schemas
+     : anyOf, oneOf, allOf
+  */
+  renderCombination(schema) {
+    let combMetaData;
+    if ("anyOf" in schema) {
+      combMetaData = {
+        combType: "anyOf",
+        combSign: "// Any of",
+        parsingWord: "// or",
+        description: "Data can be any of the following"
+      };
+    } else if ("oneOf" in schema) {
+      combMetaData = {
+        combType: "oneOf",
+        combSign: "// One of",
+        parsingWord: "// or",
+        description: "Data should be one of the following (only one)"
+      };
+    } else {
+      combMetaData = {
+        combType: "allOf",
+        combSign: "// All of",
+        parsingWord: "// and",
+        description: "Data should satisfy all of the following"
+      };
+    }
+
+    let { combType, combSign, parsingWord, description } = combMetaData;
+
+    let rows = [];
+    const startCombRow = (
+      <TableRow>
+        <TableCell className="json-data-structure">{combSign}</TableCell>
+        <TableCell className="info-meta">{description}</TableCell>
+        <TableCell className="info-description" />
+      </TableRow>
+    );
+    rows.push(startCombRow);
+
+    const middleParseRow = (
+      <TableRow>
+        <TableCell className="json-data-structure">{parsingWord}</TableCell>
+        <TableCell className="info-meta" />
+        <TableCell className="info-description" />
+      </TableRow>
+    );
+
+    schema[combType].forEach((subSchema, index) => {
+      if (index > 0) {
+        rows.push(middleParseRow);
+      }
+      rows.push(this.renderSchema(subSchema));
+    });
+
+    return rows;
+  }
+
   /* render the given schema
      according to its type
   */
   renderSchema(schema) {
     return (
       <div className="tablebody">
-        {"$ref" in schema
+        {"anyOf" in schema || "allOf" in schema || "oneOf" in schema
+          ? this.renderCombination(schema)
+          : "$ref" in schema
           ? this.renderRef(schema)
           : schema.type === "object"
           ? this.renderObject(schema)
@@ -124,7 +184,11 @@ class SchemaViewer extends React.Component {
   render() {
     const { schema } = this.props;
 
-    return <Table className="schema-viewer">{this.renderSchema(schema)}</Table>;
+    return (
+      <div className="table-wrapper">
+        <Table className="schema-viewer">{this.renderSchema(schema)}</Table>
+      </div>
+    );
   }
 }
 

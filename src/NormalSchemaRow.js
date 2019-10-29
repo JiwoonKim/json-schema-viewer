@@ -33,7 +33,6 @@ class NormalSchemaRow extends React.Component {
           {dataSign}
           {isTopRowDereference && (
             <button className="ref-click" onClick={handleRefToggle}>
-              <span>{isTopRowDereference}</span>
               <RemoveCircleRoundedIcon fontSize="small" />
             </button>
           )}

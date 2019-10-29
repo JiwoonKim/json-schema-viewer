@@ -1,0 +1,14 @@
+{
+  "oneOf": [
+    {
+      "type": "number",
+      "multipleOf": 5,
+      "description": "Number is multiple of 5"
+    },
+    {
+      "type": "number",
+      "multipleOf": 3,
+      "description": "Number is multiple of 3"
+    }
+  ]
+}

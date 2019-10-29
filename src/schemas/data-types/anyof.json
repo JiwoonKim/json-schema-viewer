@@ -1,0 +1,19 @@
+{
+  "anyOf": [
+    { "type": "number", "description": "Post office number of user" },
+    {
+      "type": "object",
+      "description": "Full address",
+      "properties": {
+        "city": {
+          "type": "string",
+          "description": "Name of city of the address"
+        },
+        "state": {
+          "type": "string",
+          "description": "Name of city of the address"
+        }
+      }
+    }
+  ]
+}

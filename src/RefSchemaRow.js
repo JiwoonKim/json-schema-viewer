@@ -2,6 +2,7 @@ import React from "react";
 import { TableRow, TableCell } from "@material-ui/core";
 import NormalSchemaRow from "./NormalSchemaRow";
 import AddCircleRoundedIcon from "@material-ui/icons/AddCircleRounded";
+import RemoveCircleRoundedIcon from "@material-ui/icons/RemoveCircleRounded";
 import "./styles.css";
 
 /* creates a single row based on given schema
