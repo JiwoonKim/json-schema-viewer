@@ -56,10 +56,7 @@ class App extends React.Component {
     return (
       <div>
         <h3> Array Types </h3>
-        <p>
-          uses <strong className="arrayItem"> &#10551; </strong> to indicate
-          array item types
-        </p>
+        <p>uses &#91; &#93; to indicate array item types</p>
         {this.view(arrayTypeComplex)}
         <h3>(1) list validation</h3>
         <p>list validation schemas are displayed</p>

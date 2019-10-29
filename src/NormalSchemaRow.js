@@ -8,12 +8,7 @@ import "./styles.css";
 */
 class NormalSchemaRow extends React.Component {
   render() {
-    const {
-      schema,
-      isTopRowDereference,
-      isArrayItem,
-      handleRefToggle
-    } = this.props;
+    const { schema, isTopRowDereference, handleRefToggle } = this.props;
     const hasName = schema.name ? schema.name : "";
     var dataSign, type;
 
@@ -23,7 +18,7 @@ class NormalSchemaRow extends React.Component {
         type = "Object of";
         break;
       case "array":
-        dataSign = "[ ]";
+        dataSign = "[";
         type = "Array of";
         break;
       default:
@@ -34,7 +29,6 @@ class NormalSchemaRow extends React.Component {
     return (
       <TableRow>
         <TableCell className="json-data-structure">
-          {isArrayItem && <strong className="arrayItem"> &#10551; </strong>}
           {hasName && <span>{schema.name} : </span>}
           {dataSign}
           {isTopRowDereference && (

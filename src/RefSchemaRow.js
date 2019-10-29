@@ -1,5 +1,5 @@
 import React from "react";
-import { TableBody, TableRow, TableCell } from "@material-ui/core";
+import { TableRow, TableCell } from "@material-ui/core";
 import NormalSchemaRow from "./NormalSchemaRow";
 import AddCircleRoundedIcon from "@material-ui/icons/AddCircleRounded";
 import "./styles.css";
@@ -26,12 +26,11 @@ class RefSchemaRow extends React.Component {
   /* creates a SchemaRow based on given schema
      (equivalent to <NormalRow> in react-schema-viewer)
   */
-  createNormalRow(schema, isTopRow, isArrayItem = false) {
+  createNormalRow(schema, isTopRow) {
     return (
       <NormalSchemaRow
         schema={schema}
         isTopRowDereference={isTopRow}
-        isArrayItem={isArrayItem}
         handleRefToggle={this.handleRefToggle}
       />
     );
@@ -39,35 +38,44 @@ class RefSchemaRow extends React.Component {
 
   /* creates a SchemaRow for $ref
    */
-  createRefSchemaRow(schema, isArrayItem = false) {
-    return <RefSchemaRow schema={schema} isArrayItem={isArrayItem} />;
+  createRefSchemaRow(schema) {
+    return <RefSchemaRow schema={schema} />;
   }
 
   /* renders default types
    : string, numeric type, boolean, null
   */
-  renderDefault(schema, isTopRow = false, isArrayItem = false) {
-    return this.createNormalRow(schema, isTopRow, isArrayItem);
+  renderDefault(schema, isTopRow = false) {
+    return this.createNormalRow(schema, isTopRow);
   }
 
   /* renders array schema types:
    "array name: []
     + renders item schemas"
   */
-  renderArray(schema, isTopRow = false, isArrayItem = false) {
+  renderArray(schema, isTopRow = false) {
     let rows = [];
-    rows.push(this.createNormalRow(schema, isTopRow, isArrayItem));
+    rows.push(this.createNormalRow(schema, isTopRow));
 
     // list validation: single schema for all items
     if (!Array.isArray(schema.items)) {
-      rows.push(this.renderSchema(schema.items, true));
+      rows.push(this.renderSchema(schema.items));
     }
     // tuple validation: different schemas in certain order
     else {
       schema.items.forEach(itemSchema => {
-        rows.push(this.renderSchema(itemSchema, true));
+        rows.push(this.renderSchema(itemSchema));
       });
     }
+
+    const closeArrayRow = (
+      <TableRow>
+        <TableCell className="json-data-structure">&#93;</TableCell>
+        <TableCell className="info-meta" />
+        <TableCell className="info-description" />
+      </TableRow>
+    );
+    rows.push(closeArrayRow);
     return rows;
   }
 
@@ -76,9 +84,9 @@ class RefSchemaRow extends React.Component {
      subschemas nested within
    } "
   */
-  renderObject(schema, isTopRow = false, isArrayItem = false) {
+  renderObject(schema, isTopRow = false) {
     let rows = [];
-    rows.push(this.createNormalRow(schema, isTopRow, isArrayItem));
+    rows.push(this.createNormalRow(schema, isTopRow));
 
     if (schema.properties) {
       Object.entries(schema.properties).forEach(([key, subSchema]) => {
@@ -94,7 +102,7 @@ class RefSchemaRow extends React.Component {
 
     const closeObjectRow = (
       <TableRow>
-        <TableCell className="json-data-structure">}</TableCell>
+        <TableCell className="json-data-structure">&#125;</TableCell>
         <TableCell className="info-meta" />
         <TableCell className="info-description" />
       </TableRow>
@@ -107,7 +115,7 @@ class RefSchemaRow extends React.Component {
     (no dereferencing,
     also renderRef does not need  isTopRow parameter)
   */
-  renderRef(schema, isArrayItem = false) {
+  renderRef(schema) {
     const refURI = schema["$ref"];
     const parsedURI = refURI.split("/");
 
@@ -119,22 +127,22 @@ class RefSchemaRow extends React.Component {
       uri: refURI,
       schemaSource: this.props.schemaSource
     };
-    return this.createRefSchemaRow(refSchema, isArrayItem);
+    return this.createRefSchemaRow(refSchema);
   }
 
   /* render the given schema
      according to its type
   */
-  renderSchema(schema, isTopRow = false, isArrayItem = false) {
+  renderSchema(schema, isTopRow = false) {
     return (
       <div className="tablebody">
         {"$ref" in schema
-          ? this.renderRef(schema, isArrayItem)
+          ? this.renderRef(schema)
           : schema.type === "object"
-          ? this.renderObject(schema, isTopRow, isArrayItem)
+          ? this.renderObject(schema, isTopRow)
           : schema.type === "array"
-          ? this.renderArray(schema, isTopRow, isArrayItem)
-          : this.renderDefault(schema, isTopRow, isArrayItem)}
+          ? this.renderArray(schema, isTopRow)
+          : this.renderDefault(schema, isTopRow)}
       </div>
     );
   }
