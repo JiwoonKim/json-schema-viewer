@@ -27,7 +27,7 @@ class NormalSchemaRow extends React.Component {
     }
 
     return (
-      <TableRow>
+      <TableRow className="table-row">
         <TableCell className="json-data-structure">
           {hasName && <span>{schema.name} : </span>}
           {dataSign}

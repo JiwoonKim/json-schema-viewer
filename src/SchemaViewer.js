@@ -166,29 +166,24 @@ class SchemaViewer extends React.Component {
      according to its type
   */
   renderSchema(schema) {
-    return (
-      <div className="tablebody">
-        {"anyOf" in schema || "allOf" in schema || "oneOf" in schema
-          ? this.renderCombination(schema)
-          : "$ref" in schema
-          ? this.renderRef(schema)
-          : schema.type === "object"
-          ? this.renderObject(schema)
-          : schema.type === "array"
-          ? this.renderArray(schema)
-          : this.renderDefault(schema)}
-      </div>
-    );
+    let callMethod =
+      "anyOf" in schema || "allOf" in schema || "oneOf" in schema
+        ? this.renderCombination(schema)
+        : "$ref" in schema
+        ? this.renderRef(schema)
+        : schema.type === "object"
+        ? this.renderObject(schema)
+        : schema.type === "array"
+        ? this.renderArray(schema)
+        : this.renderDefault(schema);
+
+    return callMethod;
   }
 
   render() {
     const { schema } = this.props;
 
-    return (
-      <div className="table-wrapper">
-        <Table className="schema-viewer">{this.renderSchema(schema)}</Table>
-      </div>
-    );
+    return <Table className="schema-viewer">{this.renderSchema(schema)}</Table>;
   }
 }
 

@@ -3,15 +3,14 @@
   font-family: sans-serif;
   text-align: center;
 }
-
 h3 {
   color: rgb(56, 56, 233);
 }
-
 h4 {
   color: rgb(80, 80, 165);
 }
 
+/* styles for buttons in App component */
 .tab {
   background-color: rgba(75, 75, 235, 0.911);
   color: white;
@@ -20,32 +19,37 @@ h4 {
   font-size: 14px;
   padding: 10px;
 }
-
 .tab:hover {
   background-color: rgba(122, 122, 235, 0.911);
 }
 .tab:active {
   background-color: red;
 }
-
 .warning {
   color: rgb(233, 59, 59);
 }
 
-/* style for each column in a row
+/* style for table and each column in a row
    (json-data-structure | info-meta | info-description)
 */
+table {
+  font-size: 14px;
+  display: block;
+}
 .json-data-structure {
   width: 40%;
   background-color: lightyellow;
+  white-space: nowrap;
 }
-
 .info-meta {
-  width: 200px;
+  width: 20%;
+  white-space: nowrap;
 }
-
 .info-description {
-  width: 300px;
+  width: 40%;
+}
+.table-wrapper {
+  overflow-x: auto;
 }
 
 /* button style for expand/shrink $ref */
@@ -53,13 +57,4 @@ h4 {
   background-color: transparent;
   color: rgb(80, 80, 165);
   border: none;
-}
-
-/* */
-.table-wrapper {
-  overflow-x: auto;
-}
-
-tr {
-  min-width: 100%;
 }
