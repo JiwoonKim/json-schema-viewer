@@ -5,9 +5,16 @@
     },
     "address": {
       "type": "object",
+      "description": "Full address",
       "properties": {
-        "city": { "type": "string" },
-        "state": { "type": "string" }
+        "city": {
+          "type": "string",
+          "description": "Name of city of the address"
+        },
+        "state": {
+          "type": "string",
+          "description": "Name of city of the address"
+        }
       }
     }
   },

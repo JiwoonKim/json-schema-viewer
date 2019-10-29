@@ -2,10 +2,12 @@
   "definitions": {
     "person": {
       "type": "object",
+      "description": "Person to get information about",
       "properties": {
-        "name": { "type": "string" },
+        "name": { "type": "string", "description": "Full name of the person" },
         "children": {
           "type": "array",
+          "description": "Information about children of the person",
           "items": { "$ref": "#/definitions/person" },
           "default": []
         }
