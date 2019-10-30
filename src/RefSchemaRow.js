@@ -135,17 +135,16 @@ class RefSchemaRow extends React.Component {
      according to its type
   */
   renderSchema(schema, isTopRow = false) {
-    return (
-      <div className="tablebody">
-        {"$ref" in schema
-          ? this.renderRef(schema)
-          : schema.type === "object"
-          ? this.renderObject(schema, isTopRow)
-          : schema.type === "array"
-          ? this.renderArray(schema, isTopRow)
-          : this.renderDefault(schema, isTopRow)}
-      </div>
-    );
+    let callMethod =
+      "$ref" in schema
+        ? this.renderRef(schema)
+        : schema.type === "object"
+        ? this.renderObject(schema, isTopRow)
+        : schema.type === "array"
+        ? this.renderArray(schema, isTopRow)
+        : this.renderDefault(schema, isTopRow);
+
+    return callMethod;
   }
 
   render() {
@@ -180,7 +179,8 @@ class RefSchemaRow extends React.Component {
       const refSchema = require(refURI).definitions[dataSign];
       refSchema.name = schema.name;
 
-      return <div>{this.renderSchema(refSchema, true)}</div>;
+      const callMethod = this.renderSchema(refSchema, true);
+      return callMethod;
     }
   }
 }

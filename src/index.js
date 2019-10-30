@@ -133,7 +133,10 @@ class App extends React.Component {
     return (
       <div>
         <h2>JSON Schema Viewer Demo :)</h2>
-        <p className="warning">indentation is not provided at the moment!</p>
+        <p className="warning">working on adding scrollers to each column</p>
+        <p className="warning">
+          when finished, indentations for json structure will be implemented
+        </p>
         <div className="buttons">
           <button
             className="tab"

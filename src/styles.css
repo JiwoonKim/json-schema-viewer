@@ -34,22 +34,21 @@ h4 {
 */
 table {
   font-size: 14px;
-  display: block;
+
+  padding: 0;
+}
+tr,
+td {
+  padding: 0;
 }
 .json-data-structure {
   width: 40%;
   background-color: lightyellow;
-  white-space: nowrap;
 }
 .info-meta {
-  width: 20%;
-  white-space: nowrap;
+  width: 100px;
 }
 .info-description {
-  width: 40%;
-}
-.table-wrapper {
-  overflow-x: auto;
 }
 
 /* button style for expand/shrink $ref */
