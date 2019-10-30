@@ -34,10 +34,13 @@ h4 {
 */
 table {
   font-size: 14px;
-
+  width: 100vw;
   padding: 0;
 }
-tr,
+tr {
+  padding: 0;
+  width: 100%:
+}
 td {
   padding: 0;
 }

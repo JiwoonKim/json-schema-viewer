@@ -30,7 +30,7 @@ class NormalSchemaRow extends React.Component {
       <TableRow className="table-row">
         <TableCell className="json-data-structure">
           {hasName && <span>{schema.name} : </span>}
-          {dataSign}
+          <span>{dataSign}</span>
           {isTopRowDereference && (
             <button className="ref-click" onClick={handleRefToggle}>
               <RemoveCircleRoundedIcon fontSize="small" />
@@ -41,7 +41,9 @@ class NormalSchemaRow extends React.Component {
           <p>{schema.title}</p>
           <p>({type})</p>
         </TableCell>
-        <TableCell className="info-description">{schema.description}</TableCell>
+        <TableCell className="info-description">
+          <span>{schema.description}</span>
+        </TableCell>
       </TableRow>
     );
   }
