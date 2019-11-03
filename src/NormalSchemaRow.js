@@ -8,27 +8,58 @@ import "./styles.css";
 */
 class NormalSchemaRow extends React.Component {
   render() {
-    const { schema, isTopRowDereference, handleRefToggle } = this.props;
+    const { schema, indent, isTopRowDereference, handleRefToggle } = this.props;
     const hasName = schema.name ? schema.name : "";
-    var dataSign, type;
 
+    // configure datatype and sign to display
+    var dataSign, type;
     switch (schema.type) {
       case "object":
         dataSign = "{";
-        type = "Object of";
+        type = "";
         break;
       case "array":
         dataSign = "[";
-        type = "Array of";
+        type = "";
         break;
       default:
-        dataSign = `"..."`;
-        type = schema.type;
+        dataSign = "";
+        type = `(${schema.type})`;
     }
+
+    // configure validation keywords
+    const validKeywords = [
+      "additionalProperties",
+      "uniqueItems",
+      "format",
+      "pattern",
+      "maxLength",
+      "minLength",
+      "multipleOf",
+      "maximum",
+      "minimum"
+    ];
+    const validationProperties = [];
+    validKeywords.forEach(keyword => {
+      if (keyword in schema) {
+        validationProperties.push(`${keyword}: ${schema[keyword]}`);
+      }
+    });
+    if ("required" in schema) {
+      let fields = "";
+      schema.required.forEach(field => {
+        fields += field + ", ";
+      });
+      validKeywords.push(`required: ${fields}`);
+    }
+
+    // configure indentation level
+    const indentation = "      ".repeat(indent);
 
     return (
       <TableRow className="table-row">
         <TableCell className="json-data-structure">
+          <span className="json-indentation">{indentation}</span>
           {hasName && <span>{schema.name} : </span>}
           <span>{dataSign}</span>
           {isTopRowDereference && (
@@ -38,8 +69,12 @@ class NormalSchemaRow extends React.Component {
           )}
         </TableCell>
         <TableCell className="info-meta">
-          <p>{schema.title}</p>
-          <p>({type})</p>
+          <p>
+            <strong>{type}</strong>
+          </p>
+          {validationProperties.map(keyword => (
+            <p>{keyword}</p>
+          ))}
         </TableCell>
         <TableCell className="info-description">
           <span>{schema.description}</span>

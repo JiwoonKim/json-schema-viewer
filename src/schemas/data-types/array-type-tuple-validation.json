@@ -4,10 +4,12 @@
   "description": "List of expanded scopes",
   "items": [
     {
+      "name": "expandedScope",
       "type": "string",
       "description": "A single scope"
     },
     {
+      "name": "scopeNum",
       "type": "number",
       "description": "The number for a single scope"
     }

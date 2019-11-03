@@ -131,12 +131,14 @@ class App extends React.Component {
 
   renderHeader() {
     return (
-      <div>
+      <div className="header">
         <h2>JSON Schema Viewer Demo :)</h2>
-        <p className="warning">working on adding scrollers to each column</p>
-        <p className="warning">
-          when finished, indentations for json structure will be implemented
-        </p>
+        <div className="header-description">
+          <p className="warning">trying to add scrollers to each column!</p>
+          <p className="warning">
+            when finished, will try to implement indentations :)
+          </p>
+        </div>
         <div className="buttons">
           <button
             className="tab"

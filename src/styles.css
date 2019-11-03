@@ -9,8 +9,14 @@ h3 {
 h4 {
   color: rgb(80, 80, 165);
 }
+.header {
+  width: 100%;
+}
 
 /* styles for buttons in App component */
+.buttons {
+  display: inline-block;
+}
 .tab {
   background-color: rgba(75, 75, 235, 0.911);
   color: white;
@@ -39,7 +45,8 @@ table {
 }
 tr {
   padding: 0;
-  width: 100%:
+  width: 100%;
+
 }
 td {
   padding: 0;
@@ -48,10 +55,14 @@ td {
   width: 40%;
   background-color: lightyellow;
 }
+.json-indentation {
+  white-space: pre;
+}
 .info-meta {
-  width: 100px;
+  width: 20%;
 }
 .info-description {
+  width: 40%;
 }
 
 /* button style for expand/shrink $ref */

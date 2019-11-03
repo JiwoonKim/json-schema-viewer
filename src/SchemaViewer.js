@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, TableRow, TableCell } from "@material-ui/core";
+import { Table, TableBody, TableRow, TableCell } from "@material-ui/core";
 import NormalSchemaRow from "./NormalSchemaRow";
 import RefSchemaRow from "./RefSchemaRow";
 import "./styles.css";
@@ -8,44 +8,47 @@ class SchemaViewer extends React.Component {
   /* creates a SchemaRow based on given schema
      (equivalent to <NormalRow> in react-schema-viewer)
   */
-  createNormalRow(schema) {
-    return <NormalSchemaRow schema={schema} />;
+  createNormalRow(schema, indent) {
+    return <NormalSchemaRow schema={schema} indent={indent} />;
   }
 
   /* creates a SchemaRow for $ref
    */
-  createRefSchemaRow(schema) {
-    return <RefSchemaRow schema={schema} />;
+  createRefSchemaRow(schema, indent) {
+    return <RefSchemaRow schema={schema} indent={indent} />;
   }
 
   /* renders default types
      : string, numeric type, boolean, null
   */
-  renderDefault(schema) {
-    return this.createNormalRow(schema);
+  renderDefault(schema, indent) {
+    return this.createNormalRow(schema, indent);
   }
 
   /* renders array schema types:
      "array name: [ item schemas ]"
   */
-  renderArray(schema) {
+  renderArray(schema, indent) {
     let rows = [];
-    rows.push(this.createNormalRow(schema));
+    rows.push(this.createNormalRow(schema, indent));
 
     // list validation: single schema for all items
     if (!Array.isArray(schema.items)) {
-      rows.push(this.renderSchema(schema.items));
+      rows.push(this.renderSchema(schema.items, indent + 1));
     }
     // tuple validation: different schemas in certain order
     else {
       schema.items.forEach(itemSchema => {
-        rows.push(this.renderSchema(itemSchema));
+        rows.push(this.renderSchema(itemSchema, indent + 1));
       });
     }
 
     const closeArrayRow = (
       <TableRow>
-        <TableCell className="json-data-structure">&#93;</TableCell>
+        <TableCell className="json-data-structure">
+          <span className="json-indentation">{"      ".repeat(indent)}</span>
+          <span>&#93;</span>
+        </TableCell>
         <TableCell className="info-meta" />
         <TableCell className="info-description" />
       </TableRow>
@@ -59,25 +62,28 @@ class SchemaViewer extends React.Component {
        subschemas nested within
      } "
   */
-  renderObject(schema) {
+  renderObject(schema, indent) {
     let rows = [];
-    rows.push(this.createNormalRow(schema));
+    rows.push(this.createNormalRow(schema, indent));
 
     if (schema.properties) {
       Object.entries(schema.properties).forEach(([key, subSchema]) => {
         /* make sure subSchemas have name property
          in case $ref is used within
-      */
+        */
         if (!("name" in subSchema)) {
           subSchema["name"] = key;
         }
-        rows.push(this.renderSchema(subSchema));
+        rows.push(this.renderSchema(subSchema, indent + 1));
       });
     }
 
     const closeObjectRow = (
       <TableRow>
-        <TableCell className="json-data-structure">&#125;</TableCell>
+        <TableCell className="json-data-structure">
+          <span className="json-indentation">{"      ".repeat(indent)}</span>
+          <span>&#125;</span>
+        </TableCell>
         <TableCell className="info-meta" />
         <TableCell className="info-description" />
       </TableRow>
@@ -89,7 +95,7 @@ class SchemaViewer extends React.Component {
   /* render $ref in collapsed form
      (no dereferencing)
   */
-  renderRef(schema) {
+  renderRef(schema, indent) {
     const refURI = schema["$ref"];
     const parsedURI = refURI.split("/");
 
@@ -101,13 +107,13 @@ class SchemaViewer extends React.Component {
       uri: refURI,
       schemaSource: this.props.schemaSource
     };
-    return this.createRefSchemaRow(refSchema);
+    return this.createRefSchemaRow(refSchema, indent);
   }
 
   /* render combination of schemas
      : anyOf, oneOf, allOf
   */
-  renderCombination(schema) {
+  renderCombination(schema, indent) {
     let combMetaData;
     if ("anyOf" in schema) {
       combMetaData = {
@@ -137,8 +143,13 @@ class SchemaViewer extends React.Component {
     let rows = [];
     const startCombRow = (
       <TableRow>
-        <TableCell className="json-data-structure">{combSign}</TableCell>
-        <TableCell className="info-meta">{description}</TableCell>
+        <TableCell className="json-data-structure">
+          <span className="json-indentation">{"      ".repeat(indent)}</span>
+          <span>{combSign}</span>
+        </TableCell>
+        <TableCell className="info-meta">
+          <span>{description}</span>
+        </TableCell>
         <TableCell className="info-description" />
       </TableRow>
     );
@@ -146,7 +157,10 @@ class SchemaViewer extends React.Component {
 
     const middleParseRow = (
       <TableRow>
-        <TableCell className="json-data-structure">{parsingWord}</TableCell>
+        <TableCell className="json-data-structure">
+          <span className="json-indentation">{"      ".repeat(indent)}</span>
+          <span>{parsingWord}</span>
+        </TableCell>
         <TableCell className="info-meta" />
         <TableCell className="info-description" />
       </TableRow>
@@ -156,7 +170,7 @@ class SchemaViewer extends React.Component {
       if (index > 0) {
         rows.push(middleParseRow);
       }
-      rows.push(this.renderSchema(subSchema));
+      rows.push(this.renderSchema(subSchema, indent));
     });
 
     return rows;
@@ -165,17 +179,17 @@ class SchemaViewer extends React.Component {
   /* render the given schema
      according to its type
   */
-  renderSchema(schema) {
+  renderSchema(schema, indent) {
     let callMethod =
       "anyOf" in schema || "allOf" in schema || "oneOf" in schema
-        ? this.renderCombination(schema)
+        ? this.renderCombination(schema, indent)
         : "$ref" in schema
-        ? this.renderRef(schema)
+        ? this.renderRef(schema, indent)
         : schema.type === "object"
-        ? this.renderObject(schema)
+        ? this.renderObject(schema, indent)
         : schema.type === "array"
-        ? this.renderArray(schema)
-        : this.renderDefault(schema);
+        ? this.renderArray(schema, indent)
+        : this.renderDefault(schema, indent);
 
     return callMethod;
   }
@@ -183,7 +197,11 @@ class SchemaViewer extends React.Component {
   render() {
     const { schema } = this.props;
 
-    return <Table className="schema-viewer">{this.renderSchema(schema)}</Table>;
+    return (
+      <Table className="schema-viewer">
+        <TableBody>{this.renderSchema(schema, 0)}</TableBody>
+      </Table>
+    );
   }
 }
 

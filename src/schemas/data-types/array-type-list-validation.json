@@ -3,6 +3,7 @@
   "type": "array",
   "description": "List of scopes",
   "items": {
+    "name": "scope",
     "type": "string",
     "description": "A single scope"
   }
