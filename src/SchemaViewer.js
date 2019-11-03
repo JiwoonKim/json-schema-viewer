@@ -119,22 +119,19 @@ class SchemaViewer extends React.Component {
       combMetaData = {
         combType: "anyOf",
         combSign: "// Any of",
-        parsingWord: "// or",
-        description: "Data can be any of the following"
+        parsingWord: "// or"
       };
     } else if ("oneOf" in schema) {
       combMetaData = {
         combType: "oneOf",
         combSign: "// One of",
-        parsingWord: "// or",
-        description: "Data should be one of the following (only one)"
+        parsingWord: "// or"
       };
     } else {
       combMetaData = {
         combType: "allOf",
         combSign: "// All of",
-        parsingWord: "// and",
-        description: "Data should satisfy all of the following"
+        parsingWord: "// and"
       };
     }
 

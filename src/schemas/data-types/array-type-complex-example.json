@@ -1,25 +1,29 @@
 {
   "type": "array",
+  "uniqueItems": true,
   "description": "List of roles",
   "items": {
     "type": "object",
+    "additionalProperties": false,
     "title": "Get Role Response",
     "description": "Get all details about a role",
     "properties": {
-      "created": {
-        "name": "created",
-        "type": "string",
-        "description": "Description of what this role is used for."
+      "expires": {
+        "description": "Date and time where the clients access is set to expire\n",
+        "format": "date-time",
+        "type": "string"
       },
       "scopes": {
         "name": "scopes",
-        "type": "array",
-        "description": "List of scopes",
+        "default": [],
+        "description": "List of scopes the client has (unexpanded).  Scopes must be composed of\nprintable ASCII characters and spaces.\n",
         "items": {
-          "name": "scope",
-          "type": "string",
-          "description": "A single scope"
-        }
+          "description": "Scope",
+          "pattern": "^[ -~]*$",
+          "type": "string"
+        },
+        "type": "array",
+        "uniqueItems": true
       }
     }
   }

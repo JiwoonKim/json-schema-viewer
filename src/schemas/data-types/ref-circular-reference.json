@@ -2,11 +2,18 @@
   "definitions": {
     "person": {
       "type": "object",
+      "additionalProperties": true,
+      "required": ["name", "children"],
       "description": "Person to get information about",
       "properties": {
-        "name": { "type": "string", "description": "Full name of the person" },
+        "name": {
+          "type": "string",
+          "description": "Full name of the person",
+          "pattern": "^[ -~]*$"
+        },
         "children": {
           "type": "array",
+          "uniqueItems": true,
           "description": "Information about children of the person",
           "items": { "$ref": "#/definitions/person" },
           "default": []

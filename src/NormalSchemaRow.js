@@ -50,7 +50,7 @@ class NormalSchemaRow extends React.Component {
       schema.required.forEach(field => {
         fields += field + ", ";
       });
-      validKeywords.push(`required: ${fields}`);
+      validationProperties.push(`required: ${fields}`);
     }
 
     // configure indentation level

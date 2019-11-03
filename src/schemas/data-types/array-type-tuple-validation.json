@@ -1,17 +1,18 @@
 {
   "name": "expandedScopes",
+  "description": "List of scopes granted to this client by matching roles.  Scopes must be\ncomposed of printable ASCII characters and spaces.\n",
   "type": "array",
-  "description": "List of expanded scopes",
+  "uniqueItems": true,
   "items": [
     {
-      "name": "expandedScope",
-      "type": "string",
-      "description": "A single scope"
+      "description": "Scope that client is granted by a role\n",
+      "pattern": "^[ -~]*$",
+      "type": "string"
     },
     {
-      "name": "scopeNum",
       "type": "number",
-      "description": "The number for a single scope"
+      "description": "The number for a single scope",
+      "minimum": 0
     }
   ]
 }

@@ -1,17 +1,23 @@
 {
   "anyOf": [
-    { "type": "number", "description": "Post office number of user" },
+    {
+      "type": "number",
+      "description": "Post office number of user",
+      "minimum": 1000
+    },
     {
       "type": "object",
+      "required": ["city", "state"],
       "description": "Full address",
       "properties": {
         "city": {
           "type": "string",
+          "pattern": "^[ -~]*$",
           "description": "Name of city of the address"
         },
         "state": {
           "type": "string",
-          "description": "Name of city of the address"
+          "description": "Name of state of the address"
         }
       }
     }

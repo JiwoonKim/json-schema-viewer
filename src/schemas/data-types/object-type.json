@@ -1,22 +1,27 @@
 {
   "type": "object",
+  "additionalProperties": true,
+  "required": ["client", "email"],
   "properties": {
     "client": {
       "name": "client",
       "title": "Get Client",
       "type": "object",
+      "additionalProperties": false,
       "description": "Get all details about a client",
       "properties": {
         "clientId": {
           "name": "clientId",
           "type": "number",
-          "description": ""
+          "description": "",
+          "minimum": 1000
         }
       }
     },
     "email": {
       "name": "email",
-      "type": "string"
+      "type": "string",
+      "format": "email"
     }
   }
 }

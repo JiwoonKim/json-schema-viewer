@@ -1,10 +1,12 @@
 {
   "name": "scopes",
-  "type": "array",
-  "description": "List of scopes",
+  "default": [],
+  "description": "List of scopes the client has (unexpanded).  Scopes must be composed of\nprintable ASCII characters and spaces.\n",
   "items": {
-    "name": "scope",
-    "type": "string",
-    "description": "A single scope"
-  }
+    "description": "Scope",
+    "pattern": "^[ -~]*$",
+    "type": "string"
+  },
+  "type": "array",
+  "uniqueItems": true
 }

@@ -5,15 +5,19 @@
     },
     "address": {
       "type": "object",
-      "description": "Full address",
+      "additionalProperties": false,
+      "required": ["city", "state"],
+      "description": "Full address of user",
       "properties": {
         "city": {
           "type": "string",
-          "description": "Name of city of the address"
+          "description": "Name of city of the address",
+          "pattern": "^[ -~]*$"
         },
         "state": {
           "type": "string",
-          "description": "Name of city of the address"
+          "description": "Name of state of the address",
+          "maxLength": 20
         }
       }
     }

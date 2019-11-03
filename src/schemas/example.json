@@ -37,7 +37,6 @@
           "expandedScopes": {
             "description": "List of scopes granted to this client by matching roles.  Scopes must be\ncomposed of printable ASCII characters and spaces.\n",
             "items": {
-              "name": "scope",
               "description": "Scope that client is granted by a role\n",
               "pattern": "^[ -~]*$",
               "type": "string"
@@ -69,7 +68,6 @@
             "default": [],
             "description": "List of scopes the client has (unexpanded).  Scopes must be composed of\nprintable ASCII characters and spaces.\n",
             "items": {
-              "name": "scope",
               "description": "Scope",
               "pattern": "^[ -~]*$",
               "type": "string"
